@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/agile-table'),
+      dir: require('path').join(__dirname, './coverage/am-grid'),
       subdir: '.',
       reporters: [
         { type: 'html' },
