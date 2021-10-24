@@ -1,24 +1,23 @@
 <am-grid-toolbar *ngIf="showTopToolbar" [position]="'top'"></am-grid-toolbar>
 
-<table class="am-grid">
+<div *ngIf="noRecords" class="no-records">No records</div>
+
+<table *ngIf="!noRecords" class="am-grid">
   <thead>
     <tr>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
+      <th *ngFor="let colName of colNames">{{ colName }}</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>vvv</td>
-      <td>vvv</td>
-      <td>vvv</td>
+    <tr *ngFor="let row of data">
+      <td *ngFor="let colName of colNames">{{ row[colName] }}</td>
     </tr>
   </tbody>
 </table>
 
-<am-grid-toolbar *ngIf="showBottomToolbar" [position]="'bottom'"></am-grid-toolbar>
+<am-grid-toolbar
+  *ngIf="showBottomToolbar"
+  [position]="'bottom'"
+></am-grid-toolbar>
 
 <ng-content></ng-content>
-
-

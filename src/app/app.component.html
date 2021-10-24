@@ -1,6 +1,6 @@
 <h1>{{title}}</h1>
 <div class="content">
-  <am-grid>
+  <am-grid [data]="data">
     <ng-template amGridToolbarTemplate let-dataItem [position]="'both'" let-position="position">
       <button>Some Button</button>
       <span class="toolbar-msg">Toolbar with position: "{{position}}"</span>
