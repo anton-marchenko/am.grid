@@ -1,3 +1,8 @@
+:host {
+  display: inline-flex;
+  flex-direction: column;
+}
+
 .am-grid {
   border-spacing: 0;
   border-collapse: collapse;

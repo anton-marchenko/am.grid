@@ -1,4 +1,4 @@
-<am-grid-toolbar [position]="'top'"></am-grid-toolbar>
+<am-grid-toolbar *ngIf="showTopToolbar" [position]="'top'"></am-grid-toolbar>
 
 <table class="am-grid">
   <thead>
@@ -16,6 +16,8 @@
     </tr>
   </tbody>
 </table>
+
+<am-grid-toolbar *ngIf="showBottomToolbar" [position]="'bottom'"></am-grid-toolbar>
 
 <ng-content></ng-content>
 

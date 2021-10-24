@@ -1,8 +1,10 @@
 <h1>{{title}}</h1>
 <div class="content">
   <am-grid>
-    <ng-template amGridToolbarTemplate let-dataItem let-position="position">{{dataItem | json}}
-      Toolbar with position={{position}}
+    <ng-template amGridToolbarTemplate let-dataItem [position]="'both'" let-position="position">
+      <button>Some Button</button>
+      <span class="toolbar-msg">Toolbar with position: "{{position}}"</span>
     </ng-template>
+
   </am-grid>
 </div>

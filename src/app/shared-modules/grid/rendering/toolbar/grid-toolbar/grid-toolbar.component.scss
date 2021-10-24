@@ -1,0 +1,15 @@
+:host {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px;
+}
+
+:host(.top) {
+  border: 1px solid #bbb;
+  border-bottom: none;
+}
+
+:host(.bottom) {
+  border: 1px solid #bbb;
+  border-top: none;
+}
