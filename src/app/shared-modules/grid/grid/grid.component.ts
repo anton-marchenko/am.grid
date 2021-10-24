@@ -7,6 +7,7 @@ import {
   QueryList,
   Input,
 } from '@angular/core';
+import { GridColumnComponent } from '@shared-modules/grid/columns/grid-column/grid-column.component';
 import { GridToolbarTemplateDirective } from '@shared-modules/grid/rendering/toolbar/grid-toolbar-template.directive';
 
 type DataItem = { [key: string]: unknown };
@@ -21,7 +22,7 @@ export class GridComponent implements OnInit, AfterContentInit {
   @Input() set data(data: ReadonlyArray<DataItem> | null) {
     this._data = data;
 
-    this.colNames = data && data.length ? Object.keys(data[0]) : [];
+    this.fields = data?.length ? Object.keys(data[0]) : [];
   }
 
   get data() {
@@ -31,7 +32,12 @@ export class GridComponent implements OnInit, AfterContentInit {
   @ContentChildren(GridToolbarTemplateDirective)
   toolbarTemplateChildren: QueryList<GridToolbarTemplateDirective> | null = null;
 
-  colNames: ReadonlyArray<keyof DataItem> = [];
+  @ContentChildren(GridColumnComponent)
+  columns: QueryList<GridColumnComponent> | null = null;
+
+  private colComponents: { readonly [key: string]: GridColumnComponent } = {};
+
+  fields: ReadonlyArray<string> = [];
 
   private _data: ReadonlyArray<DataItem> | null = null;
 
@@ -66,11 +72,28 @@ export class GridComponent implements OnInit, AfterContentInit {
     return this.data === null || this.data.length === 0;
   }
 
+  getColumnTitle(field: string) {
+    return this.colComponents[field]?.title || field;
+  }
+
+  getColumnWidth(field: string) {
+    return this.colComponents[field]?.width ?? null;
+  }
+
+  getColumnHidden(field: string) {
+    return !!this.colComponents[field]?.hidden;
+  }
+
   ngAfterContentInit() {
-    if (this.toolbarTemplateChildren !== null) {
-      this.toolbarTemplateChildren.forEach((itm) => {
-        // console.log(itm);
-      });
-    }
+    this.colComponents =
+      this.columns?.reduce((acc, curr) => {
+        return curr.field
+          ? {
+              ...acc,
+              [curr.field]: curr,
+            }
+          : { ...acc };
+      }, {}) ?? [];
+
   }
 }

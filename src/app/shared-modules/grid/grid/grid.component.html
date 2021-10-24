@@ -5,12 +5,18 @@
 <table *ngIf="!noRecords" class="am-grid">
   <thead>
     <tr>
-      <th *ngFor="let colName of colNames">{{ colName }}</th>
+      <ng-container *ngFor="let field of fields">
+        <th  *ngIf="!getColumnHidden(field)" [attr.width]="getColumnWidth(field)">
+          {{ getColumnTitle(field) }}
+        </th>
+      </ng-container>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let row of data">
-      <td *ngFor="let colName of colNames">{{ row[colName] }}</td>
+      <ng-container *ngFor="let field of fields">
+        <td *ngIf="!getColumnHidden(field)">{{ row[field] }}</td>
+      </ng-container>
     </tr>
   </tbody>
 </table>
@@ -19,5 +25,3 @@
   *ngIf="showBottomToolbar"
   [position]="'bottom'"
 ></am-grid-toolbar>
-
-<ng-content></ng-content>

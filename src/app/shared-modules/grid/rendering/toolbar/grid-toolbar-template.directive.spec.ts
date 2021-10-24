@@ -1,15 +1,5 @@
-import { ElementRef, EmbeddedViewRef, TemplateRef } from '@angular/core';
+import { MockTpl } from '@shared/tests/mock-template-ref';
 import { GridToolbarTemplateDirective } from './grid-toolbar-template.directive';
-
-class MockTpl extends TemplateRef<unknown> {
-  get elementRef(): ElementRef<any> {
-    throw new Error('Method not implemented.');
-  }
-  createEmbeddedView(context: unknown): EmbeddedViewRef<unknown> {
-    throw new Error('Method not implemented.');
-  }
-
-}
 
 describe('GridToolbarTemplateDirective', () => {
   it('should create an instance', () => {
