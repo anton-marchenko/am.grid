@@ -1,0 +1,10 @@
+<ng-container
+  *ngIf="column"
+  [ngTemplateOutlet]="column.templateRef || null"
+  [ngTemplateOutletContext]="{
+    $implicit: dataItem,
+    column: column,
+    rowIndex: rowIndex,
+    columnIndex: columnIndex
+  }"
+></ng-container>

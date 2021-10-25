@@ -1,4 +1,3 @@
-<h1>{{ title }}</h1>
 <div class="content">
   <am-grid [data]="data">
     <ng-template
@@ -12,6 +11,9 @@
     </ng-template>
 
     <am-grid-column [field]="'ID'" [width]="100">
+      <ng-template amGridHeaderTemplate let-column="column">
+        <span class="red-color">{{ column.field }}</span>
+      </ng-template>
       <ng-template
         amGridCellTemplate
         let-dataItem
@@ -19,18 +21,16 @@
         let-columnIndex="columnIndex"
         let-rowIndex="rowIndex"
       >
-        {{ dataItem[column.field] }} {{ columnIndex }} {{ rowIndex }}
+        {{ dataItem[column.field] }}
       </ng-template>
     </am-grid-column>
 
     <am-grid-column [field]="'Name'" [title]="'User name'">
-      <ng-template
-        amGridCellTemplate
-        let-dataItem
-        let-columnIndex="columnIndex"
-        let-rowIndex="rowIndex"
-      >
-        {{ dataItem | json }} {{ columnIndex }} {{ rowIndex }}
+      <ng-template amGridHeaderTemplate let-column="column">
+        <span class="green-color">{{ column.title || column.field }}</span>
+      </ng-template>
+      <ng-template amGridCellTemplate let-dataItem let-column="column">
+        <span class="green-color">{{ dataItem[column.field] }}</span>
       </ng-template>
     </am-grid-column>
   </am-grid>

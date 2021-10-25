@@ -6,6 +6,7 @@ import {
   ContentChild,
 } from '@angular/core';
 import { GridCellTemplateDirective } from '@shared-modules/grid/rendering/cell/grid-cell-template.directive';
+import { GridHeaderTemplateDirective } from '@shared-modules/grid/rendering/cell/grid-header-template.directive';
 
 @Component({
   selector: 'am-grid-column',
@@ -22,15 +23,18 @@ export class GridColumnComponent implements OnInit {
   @ContentChild(GridCellTemplateDirective)
   cellTemplateChild: GridCellTemplateDirective | null = null;
 
+  @ContentChild(GridHeaderTemplateDirective)
+  headerTemplateChild: GridHeaderTemplateDirective | null = null;
+
   constructor() {}
 
-  private get template() {
-    return this.cellTemplateChild;
+  get templateRef() {
+    return this.cellTemplateChild?.templateRef;
   }
 
-  get templateRef() {
-    return this.template?.templateRef;
-  }
+  get headerTemplateRef() {
+    return this.headerTemplateChild?.templateRef;
+}
 
   ngOnInit(): void {}
 }

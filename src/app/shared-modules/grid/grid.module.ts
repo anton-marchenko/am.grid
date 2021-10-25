@@ -5,6 +5,8 @@ import { GridToolbarTemplateDirective } from './rendering/toolbar/grid-toolbar-t
 import { GridToolbarComponent } from './rendering/toolbar/grid-toolbar/grid-toolbar.component';
 import { GridColumnComponent } from './columns/grid-column/grid-column.component';
 import { GridCellTemplateDirective } from './rendering/cell/grid-cell-template.directive';
+import { GridHeaderTemplateDirective } from './rendering/cell/grid-header-template.directive';
+import { GridCellComponent } from './grid-cell/grid-cell.component';
 
 @NgModule({
   declarations: [
@@ -13,11 +15,14 @@ import { GridCellTemplateDirective } from './rendering/cell/grid-cell-template.d
     GridToolbarComponent,
     GridColumnComponent,
     GridCellTemplateDirective,
+    GridHeaderTemplateDirective,
+    GridCellComponent,
   ],
   exports: [
     GridComponent,
     GridToolbarTemplateDirective,
     GridCellTemplateDirective,
+    GridHeaderTemplateDirective,
     GridColumnComponent,
   ],
   imports: [CommonModule],

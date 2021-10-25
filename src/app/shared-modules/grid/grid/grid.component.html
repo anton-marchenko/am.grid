@@ -5,12 +5,23 @@
 <table *ngIf="!noRecords" class="am-grid">
   <thead>
     <tr>
-      <ng-container *ngFor="let field of fields">
+      <ng-container *ngFor="let field of fields; index as columnIndex">
         <th
           *ngIf="!getColumnHidden(field)"
           [attr.width]="getColumnWidth(field)"
         >
-          {{ getColumnTitle(field) }}
+          <ng-container *ngIf="!hasHeaderTemplate(field)">
+            {{ getColumnTitle(field) }}
+          </ng-container>
+          <ng-container
+            *ngIf="hasHeaderTemplate(field)"
+            [ngTemplateOutlet]="getHeaderTemplate(field)"
+            [ngTemplateOutletContext]="{
+              column: getColumn(field),
+              columnIndex: columnIndex
+            }"
+          >
+          </ng-container>
         </th>
       </ng-container>
     </tr>
