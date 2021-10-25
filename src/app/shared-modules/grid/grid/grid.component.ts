@@ -8,9 +8,8 @@ import {
   Input,
 } from '@angular/core';
 import { GridColumnComponent } from '@shared-modules/grid/columns/grid-column/grid-column.component';
+import { DataItem } from '@shared-modules/grid/data/data-item.type';
 import { GridToolbarTemplateDirective } from '@shared-modules/grid/rendering/toolbar/grid-toolbar-template.directive';
-
-type DataItem = { [key: string]: unknown };
 
 @Component({
   selector: 'am-grid',
@@ -72,6 +71,10 @@ export class GridComponent implements OnInit, AfterContentInit {
     return this.data === null || this.data.length === 0;
   }
 
+  getColumn(field: string) {
+    return this.colComponents[field];
+  }
+
   getColumnTitle(field: string) {
     return this.colComponents[field]?.title || field;
   }
@@ -84,6 +87,22 @@ export class GridComponent implements OnInit, AfterContentInit {
     return !!this.colComponents[field]?.hidden;
   }
 
+  hasCellTemplate(field: string) {
+    return this.colComponents[field]?.templateRef !== undefined;
+  }
+
+  getCellTemplate(field: string) {
+    return this.colComponents[field]?.templateRef;
+  }
+
+  hasHeaderTemplate(field: string) {
+    return this.colComponents[field]?.headerTemplateRef !== undefined;
+  }
+
+  getHeaderTemplate(field: string) {
+    return this.colComponents[field]?.headerTemplateRef ?? null;
+  }
+
   ngAfterContentInit() {
     this.colComponents =
       this.columns?.reduce((acc, curr) => {
@@ -94,6 +113,5 @@ export class GridComponent implements OnInit, AfterContentInit {
             }
           : { ...acc };
       }, {}) ?? [];
-
   }
 }

@@ -3,7 +3,9 @@ import {
   OnInit,
   ChangeDetectionStrategy,
   Input,
+  ContentChild,
 } from '@angular/core';
+import { GridCellTemplateDirective } from '@shared-modules/grid/rendering/cell/grid-cell-template.directive';
 
 @Component({
   selector: 'am-grid-column',
@@ -17,7 +19,18 @@ export class GridColumnComponent implements OnInit {
   @Input() width: number | null = null;
   @Input() hidden: boolean = false;
 
+  @ContentChild(GridCellTemplateDirective)
+  cellTemplateChild: GridCellTemplateDirective | null = null;
+
   constructor() {}
+
+  private get template() {
+    return this.cellTemplateChild;
+  }
+
+  get templateRef() {
+    return this.template?.templateRef;
+  }
 
   ngOnInit(): void {}
 }

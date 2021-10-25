@@ -14,7 +14,12 @@ import { GridCellTemplateDirective } from './rendering/cell/grid-cell-template.d
     GridColumnComponent,
     GridCellTemplateDirective,
   ],
-  exports: [GridComponent, GridToolbarTemplateDirective, GridColumnComponent],
+  exports: [
+    GridComponent,
+    GridToolbarTemplateDirective,
+    GridCellTemplateDirective,
+    GridColumnComponent,
+  ],
   imports: [CommonModule],
 })
 export class GridModule {}

@@ -6,16 +6,31 @@
   <thead>
     <tr>
       <ng-container *ngFor="let field of fields">
-        <th  *ngIf="!getColumnHidden(field)" [attr.width]="getColumnWidth(field)">
+        <th
+          *ngIf="!getColumnHidden(field)"
+          [attr.width]="getColumnWidth(field)"
+        >
           {{ getColumnTitle(field) }}
         </th>
       </ng-container>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let row of data">
-      <ng-container *ngFor="let field of fields">
-        <td *ngIf="!getColumnHidden(field)">{{ row[field] }}</td>
+    <tr *ngFor="let row of data; index as rowIndex">
+      <ng-container *ngFor="let field of fields; index as columnIndex">
+        <td *ngIf="!getColumnHidden(field)">
+          <ng-container *ngIf="!hasCellTemplate(field)">
+            {{ row[field] }}
+          </ng-container>
+          <ng-container *ngIf="getColumn(field) as column">
+            <am-grid-cell
+              [column]="column"
+              [columnIndex]="columnIndex"
+              [rowIndex]="rowIndex"
+              [dataItem]="row"
+            ></am-grid-cell>
+          </ng-container>
+        </td>
       </ng-container>
     </tr>
   </tbody>
