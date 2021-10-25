@@ -5,7 +5,7 @@
 <table *ngIf="!noRecords" class="am-grid">
   <thead>
     <tr>
-      <ng-container *ngFor="let field of fields; index as columnIndex">
+      <ng-container *ngFor="let field of fields; index as columnIndex; trackBy: trackByFn">
         <th
           *ngIf="!getColumnHidden(field)"
           [attr.width]="getColumnWidth(field)"
@@ -27,8 +27,8 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let row of data; index as rowIndex">
-      <ng-container *ngFor="let field of fields; index as columnIndex">
+    <tr *ngFor="let row of data; index as rowIndex; trackBy: trackByFn">
+      <ng-container *ngFor="let field of fields; index as columnIndex; trackBy: trackByFn">
         <td *ngIf="!getColumnHidden(field)">
           <ng-container *ngIf="!hasCellTemplate(field)">
             {{ row[field] }}

@@ -10,6 +10,7 @@ import {
 import { GridColumnComponent } from '@shared-modules/grid/columns/grid-column/grid-column.component';
 import { DataItem } from '@shared-modules/grid/data/data-item.type';
 import { GridToolbarTemplateDirective } from '@shared-modules/grid/rendering/toolbar/grid-toolbar-template.directive';
+import { trackByFn } from '@shared/utils/track-by.utils';
 
 @Component({
   selector: 'am-grid',
@@ -23,6 +24,8 @@ export class GridComponent implements OnInit, AfterContentInit {
 
     this.fields = data?.length ? Object.keys(data[0]) : [];
   }
+
+  readonly trackByFn = trackByFn;
 
   get data() {
     return this._data;
